@@ -68,14 +68,32 @@ public class Main {
                 }
 
             }
-            if(c == '2'){
-                System.out.println("doing nothing yet");
-            }
-            if(c == '3'){
-                System.out.println("im also doing nothing");
-            }
-            if(c == '0') break;
+            else if(c == '2'){
+                System.out.println("Enter name of file to be deleted");
+                String filename = sc.next();
+                Path filepath = Paths.get(projectDir.getPath() + "/" + filename);
+                try {
+                    Files.delete(filepath);
+                }
+                catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
 
+            }
+            else if(c == '3'){
+                System.out.println("Enter file name to search");
+                String filename = sc.next();
+                File files[] = projectDir.listFiles();
+                boolean flag = false;
+                for(int i=0; i<files.length; i++){
+                    if(files[i].getName().equals(filename)){
+                        flag = true;
+                    }
+                }
+                if(flag) System.out.println("File found");
+                else System.out.println("File not found");
+            }
+            else if(c == '0') break;
             else{
                 System.out.println("invalid input try again");
             }
